@@ -1,0 +1,15 @@
+<RCC>
+    <qresource prefix="/">
+        <file>main.qml</file>
+        <file>qml/Notam.qml</file>
+        <file>qml/NotamsList.qml</file>
+        <file>qml/NotamsDelegate.qml</file>
+        <file>qml/NotamsMapView.qml</file>
+        <file>qml/NotamsMapDelegate.qml</file>
+        <file>qml/NotamsWelcome.qml</file>
+        <file>qml/elements/NTextField.qml</file>
+        <file>qml/elements/NButton.qml</file>
+        <file>qml/elements/NRoundButtton.qml</file>
+        <file>qml/NotamsView.qml</file>
+    </qresource>
+</RCC>

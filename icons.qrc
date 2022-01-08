@@ -1,0 +1,8 @@
+<RCC>
+    <qresource prefix="/">
+        <file>icons/arrow-black.svg</file>
+        <file>icons/back-black.svg</file>
+        <file>icons/color-white.svg</file>
+        <file>icons/filter-white.svg</file>
+    </qresource>
+</RCC>
