@@ -11,5 +11,8 @@
         <file>qml/elements/NButton.qml</file>
         <file>qml/elements/NRoundButtton.qml</file>
         <file>qml/NotamsView.qml</file>
+        <file>qml/FilterPopup.qml</file>
+        <file>qml/NotamPopup.qml</file>
+        <file>qml/elements/NInputField.qml</file>
     </qresource>
 </RCC>
