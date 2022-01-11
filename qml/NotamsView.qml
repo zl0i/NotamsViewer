@@ -8,6 +8,9 @@ Page {
 
     property var model: []
     signal back()
+    signal openFilter()
+    signal openColor()
+    signal goToMap(var lat, var lon)
 
     Row {
         x: 15; y: 20
@@ -38,6 +41,7 @@ Page {
         spacing: 15
         NRoundButtton {
             image: "qrc:/icons/filter-white.svg"
+            onClicked: _page.openFilter()
         }
         NRoundButtton {
             image: "qrc:/icons/color-white.svg"
@@ -51,5 +55,6 @@ Page {
         height: parent.height-60
         bottomMargin: 20
         model: _page.model
+        onToMap: _page.goToMap(lat, lon)
     }
 }

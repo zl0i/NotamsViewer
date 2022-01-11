@@ -1,5 +1,6 @@
 import QtQuick 2.15
 import QtQuick.Controls 2.15
+import QtGraphicalEffects 1.15
 
 
 Item {
@@ -8,7 +9,7 @@ Item {
     height: 80
     clip: true
 
-    property string notamsId: "1"
+    property string notamsId
     property string startDate
     property string endDate
     property string createDate
@@ -19,7 +20,8 @@ Item {
     property int durationSeconds
     property string durationHumon
 
-    signal clicked()
+    signal more(int index)
+    signal clicked(var x, var y)
 
     Column {
         width: parent.width
@@ -45,9 +47,24 @@ Item {
         }
     }
 
-//    Label {
-//        text: new Date(_delegate.createDate).toLocaleString(Qt.locale(), "dd-MM-yyyy")
-//    }
+    MouseArea {
+        x: parent.width - 30
+        width: 30
+        height: parent.height
+        hoverEnabled: true
+        cursorShape: Qt.PointingHandCursor
+        onClicked: _delegate.more(_delegate.index)
+        Image {
+            x: 6; y: parent.height/2 - height/2
+            width: 24
+            height: 24
+            source: "qrc:/icons/arrow-black.svg"
+            layer.enabled: parent.containsMouse
+            layer.effect: ColorOverlay {
+                color: "#1D4B8F"
+            }
+        }
+    }
 
     Rectangle {
         width: parent.width
@@ -58,9 +75,13 @@ Item {
 
     MouseArea {
         id: _mouseArea
-        width: parent.width
+        width: parent.width-30
         height: parent.height
         hoverEnabled: true
-        onClicked: _delegate.clicked()
+        onClicked: {
+            if(_delegate.points.length > 0)   {
+                _delegate.clicked( _delegate.points[0][0].x, _delegate.points[0][0].y)
+            }
+        }
     }
 }

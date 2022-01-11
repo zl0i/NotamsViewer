@@ -20,17 +20,11 @@ ApplicationWindow {
         }
     }
 
-    Component.onCompleted: {
-        //const icaos = ['KZAK']
-        //core.loadNotams(icaos)
-    }
-
     StackView {
         id: _stack
         width: parent.width/3
         height: parent.height
         initialItem: _welcome
-
     }
 
     NotamsWelcome {
@@ -47,6 +41,17 @@ ApplicationWindow {
         visible: false
         model: core.notams
         onBack: _stack.pop(_welcome)
+        onOpenFilter: _filterPopup.open()
+        onGoToMap: {
+            _map.zoomLevel = 10
+            _map.center = QtPositioning.coordinate(lat, lon)
+        }
+    }
+
+    FilterPopup {
+        id: _filterPopup
+        x: parent.width/3 + 20
+        y: 10
     }
 
     Map {

@@ -19,6 +19,8 @@ QVariant NotamsModel::data(const QModelIndex &index, int role) const
     const QJsonObject n = array.at(index.row()).toObject();
 
     switch (role) {
+    case NotamIDRole:
+        return n.value("id").toString();
     case StartDateRole:
         return n.value("start_date").toVariant();
     case EndDateRole:
@@ -31,8 +33,10 @@ QVariant NotamsModel::data(const QModelIndex &index, int role) const
         return n.value("fl_start").toVariant();
     case FLEndRole:
         return n.value("fl_end").toVariant();
+    case IsUNLRole:
+        return n.value("isUNL").toBool();
     case PointsRole:
-        return n.value("points").toVariant();
+        return n.value("points").toArray();
     case DurationSecRole:
         return n.value("duration_sec").toVariant();
     case DurationStrRole:
@@ -46,12 +50,14 @@ QHash<int, QByteArray> NotamsModel::roleNames() const
 {
     QHash<int, QByteArray> roles;
 
+    roles[NotamIDRole] = "notamID";
     roles[StartDateRole] = "startDate";
     roles[EndDateRole] = "endDate";
     roles[CreateDateRole] = "createDate";
     roles[TextRole] = "text";
     roles[FLStartRole] = "flStart";
     roles[FLEndRole] = "flEnd";
+    roles[IsUNLRole] = "isUNL";
     roles[PointsRole] = "points";
     roles[DurationSecRole] = "durationSeconds";
     roles[DurationStrRole] = "durationHumon";

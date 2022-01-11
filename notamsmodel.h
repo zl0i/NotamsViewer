@@ -14,12 +14,14 @@ public:
     explicit NotamsModel(QObject *parent = nullptr);
 
     enum Roles {
+        NotamIDRole,
         StartDateRole,
         EndDateRole,
         CreateDateRole,
         TextRole,
         FLStartRole,
         FLEndRole,
+        IsUNLRole,
         PointsRole,
         DurationSecRole,
         DurationStrRole
