@@ -5,19 +5,21 @@
 
 #include "notamsloader.h"
 #include "notamsmodel.h"
+#include "proxynotamsmodel.h"
 
 class AppCore : public QObject
 {
     Q_OBJECT
-    Q_PROPERTY(NotamsModel* notams READ notams NOTIFY notamsChanged)
+    Q_PROPERTY(ProxyNotamsModel* notams READ notams NOTIFY notamsChanged)
 public:
     explicit AppCore(QObject *parent = nullptr);
 
-    NotamsModel* notams() { return &model; }
+    ProxyNotamsModel* notams() { return &proxyNotams; }
 
 private:
     NotamsLoader loader;
     NotamsModel model;
+    ProxyNotamsModel proxyNotams;
 
 signals:
     void finished(QJsonArray arr);

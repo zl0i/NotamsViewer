@@ -10,6 +10,8 @@ Row {
     property alias text: _text.text
     property int widthField: 55
 
+    signal textEdited();
+
     Label {
         height: parent.height
         verticalAlignment: Text.AlignVCenter
@@ -20,5 +22,6 @@ Row {
         width: _field.widthField
         height: parent.height
         verticalAlignment: Text.AlignVCenter
+        onTextEdited: _field.textEdited()
     }
 }

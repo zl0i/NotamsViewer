@@ -10,7 +10,8 @@ SOURCES += \
         appcore.cpp \
         main.cpp \
         notamsloader.cpp \
-        notamsmodel.cpp
+        notamsmodel.cpp \
+        proxynotamsmodel.cpp
 
 RESOURCES += qml.qrc \
     icons.qrc
@@ -29,4 +30,5 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 HEADERS += \
     appcore.h \
     notamsloader.h \
-    notamsmodel.h
+    notamsmodel.h \
+    proxynotamsmodel.h
