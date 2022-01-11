@@ -58,9 +58,9 @@ ApplicationWindow {
         zoomLevel: 3.5
         plugin: Plugin { name: "osm" }
 
-//        NotamsMapView {
-//            model: core.notams
-//        }
+        NotamsMapView {
+            model: core.notams
+        }
 
         Row {
             x: parent.width - width
