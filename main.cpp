@@ -14,14 +14,16 @@ int main(int argc, char *argv[])
 
     QQmlApplicationEngine engine;
 
-    AppCore core;
-    engine.rootContext()->setContextProperty("core", &core);
+    AppCore *core = new AppCore();
+    engine.rootContext()->setContextProperty("core", core);
 
     const QUrl url(QStringLiteral("qrc:/main.qml"));
     QObject::connect(&engine, &QQmlApplicationEngine::objectCreated,
-                     &app, [url](QObject *obj, const QUrl &objUrl) {
-        if (!obj && url == objUrl)
+                     &app, [url, core](QObject *obj, const QUrl &objUrl) {
+        if (!obj && url == objUrl) {
+            core->deleteLater();
             QCoreApplication::exit(-1);
+        }
     }, Qt::QueuedConnection);
     engine.load(url);
 
