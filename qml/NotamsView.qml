@@ -12,6 +12,7 @@ Page {
     signal openColor()
     signal goToMap(var lat, var lon)
     signal showNotam(var text, int y)
+    signal save();
 
     Row {
         x: 15; y: 20
@@ -40,6 +41,10 @@ Page {
         x: parent.width - width - 15
         y: 10
         spacing: 15
+        NRoundButtton {
+            image: "qrc:/icons/save-white.svg"
+            onClicked: _page.save()
+        }
         NRoundButtton {
             image: "qrc:/icons/filter-white.svg"
             onClicked: _page.openFilter()

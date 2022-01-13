@@ -25,6 +25,17 @@ Popup {
                       )
     }
 
+    function format() {
+        return {
+            id: _idFiled.text,
+            flStart: _flStartField.text,
+            flEnd: _flEndField.text,
+            regExp: _regExpFiled.text,
+            duration: Number(_durationField.text)*3600,
+            compareDuration: _durationBox.currentText
+        }
+    }
+
     Column {
         x: 15; y: 15
         spacing: 7

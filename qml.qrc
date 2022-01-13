@@ -15,5 +15,7 @@
         <file>qml/NotamPopup.qml</file>
         <file>qml/elements/NInputField.qml</file>
         <file>qml/elements/NComboBox.qml</file>
+        <file>qml/SaveDialog.qml</file>
+        <file>qml/elements/NCheckBox.qml</file>
     </qresource>
 </RCC>

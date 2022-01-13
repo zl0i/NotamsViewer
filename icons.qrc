@@ -4,5 +4,6 @@
         <file>icons/back-black.svg</file>
         <file>icons/color-white.svg</file>
         <file>icons/filter-white.svg</file>
+        <file>icons/save-white.svg</file>
     </qresource>
 </RCC>

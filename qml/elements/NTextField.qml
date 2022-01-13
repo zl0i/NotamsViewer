@@ -8,6 +8,10 @@ TextField {
     horizontalAlignment: Text.AlignLeft
     color: "#000000"
     placeholderTextColor: "#C0C4C4C4"
+    selectByMouse: true
+    selectionColor: "#3471CE"
+    selectedTextColor: "#FFFFFF"
+    wrapMode: Text.WordWrap
 
     background: Rectangle {
         width: parent.width

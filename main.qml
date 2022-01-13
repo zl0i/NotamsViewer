@@ -55,6 +55,7 @@ ApplicationWindow {
             }
             _notamPopup.open()
         }
+        onSave: _saveDialog.open()
     }
 
     FilterPopup {
@@ -68,6 +69,13 @@ ApplicationWindow {
         id: _notamPopup
         x: parent.width/3 + 20
         y: 10
+    }
+    SaveDialog {
+        id: _saveDialog
+        onSaveToRecent: {
+            close()
+            core.recents.add("test", _welcome.icaos, _filterPopup.format())
+        }
     }
 
     Map {
