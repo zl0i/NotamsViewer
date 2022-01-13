@@ -31,6 +31,7 @@ ApplicationWindow {
     NotamsWelcome {
         id: _welcome
         visible: false
+        recent: core.recents
         onLoad: {
             core.loadNotams(icaos)
             _stack.push(_notamView)

@@ -14,7 +14,7 @@ public:
     explicit NotamsModel(QObject *parent = nullptr);
 
     enum Roles {
-        NotamIDRole,
+        NotamIDRole = Qt::UserRole+1,
         StartDateRole,
         EndDateRole,
         CreateDateRole,

@@ -11,7 +11,8 @@ SOURCES += \
         main.cpp \
         notamsloader.cpp \
         notamsmodel.cpp \
-        proxynotamsmodel.cpp
+        proxynotamsmodel.cpp \
+        recentmodel.cpp
 
 RESOURCES += qml.qrc \
     icons.qrc
@@ -31,4 +32,5 @@ HEADERS += \
     appcore.h \
     notamsloader.h \
     notamsmodel.h \
-    proxynotamsmodel.h
+    proxynotamsmodel.h \
+    recentmodel.h
