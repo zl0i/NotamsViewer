@@ -10,7 +10,7 @@ Popup {
     height: 270
     padding: 0
 
-    signal filter(string id, int flStart, int flEnd, string regExp)
+    signal filter(string id, int flStart, int flEnd, string regExp, int duration, string compare)
     signal reset()
 
 
@@ -19,7 +19,10 @@ Popup {
         _popup.filter(_idFiled.text,
                       _flStartField.text,
                       _flEndField.text,
-                      _regExpFiled.text)
+                      _regExpFiled.text,
+                      Number(_durationField.text)*3600,
+                      _durationBox.currentText
+                      )
     }
 
     Column {
@@ -51,31 +54,33 @@ Popup {
         Row {
             height: 35
             spacing: 8
-
             Label {
                 height: parent.height
                 verticalAlignment: Text.AlignVCenter
                 text: "Duration:"
             }
+            NComboBox {
+                id: _durationBox
+                width: 75
+                height: parent.height
+                model: ["=", ">", "<", ">=", "<="]
+                onCurrentTextChanged: {
+                    if(Number(_durationField.text) > 0)
+                        _popup.preFilter()
+                }
+            }
             NTextField {
+                id: _durationField
                 width: 45
                 height: parent.height
                 verticalAlignment: Text.AlignVCenter
+                text: "0"
+                onTextEdited: _popup.preFilter()
             }
             Label {
                 height: parent.height
                 verticalAlignment: Text.AlignVCenter
                 text: "h"
-            }
-            NTextField {
-                width: 45
-                height: parent.height
-                verticalAlignment: Text.AlignVCenter
-            }
-            Label {
-                height: parent.height
-                verticalAlignment: Text.AlignVCenter
-                text: "m"
             }
         }
     }
@@ -89,6 +94,7 @@ Popup {
             _flStartField.text = "-1"
             _flEndField.text = "-1"
             _regExpFiled.text = ""
+            _durationField.text = "0"
             _popup.reset()
         }
     }

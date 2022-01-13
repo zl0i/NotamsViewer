@@ -19,12 +19,14 @@ private:
     int sortFlStart = -1;
     int sortFlEnd = -1;
     QString sortRegExp;
+    int sortDuration = 0;
+    QString compareDuration = "";
 
 
 signals:
 
 public slots:
-    void setFilter(QString id, int flStart, int flEnd, QString regExp);
+    void setFilter(QString id, int flStart, int flEnd, QString regExp, int duration, QString compare);
     void resetFilter();
 
 };

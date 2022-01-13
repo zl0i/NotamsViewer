@@ -27,15 +27,31 @@ bool ProxyNotamsModel::filterAcceptsRow(int sourceRow, const QModelIndex &source
         QRegExp reg(sortRegExp, Qt::CaseInsensitive);
         accept &= text.contains(reg);
     }
+    if(sortDuration != 0 && !compareDuration.isEmpty()) {
+        int duration = sourceModel()->data(index, NotamsModel::DurationSecRole).toInt();
+        if(compareDuration == "=") {
+            accept &= duration == sortDuration;
+        } else if (compareDuration == "<") {
+            accept &= duration < sortDuration;
+        } else if (compareDuration == ">") {
+            accept &= duration > sortDuration;
+        } else if (compareDuration == "<=") {
+            accept &= duration <= sortDuration;
+        } else if (compareDuration == ">=") {
+            accept &= duration >= sortDuration;
+        }
+    }
     return accept;
 }
 
-void ProxyNotamsModel::setFilter(QString id, int flStart, int flEnd, QString regExp)
+void ProxyNotamsModel::setFilter(QString id, int flStart, int flEnd, QString regExp, int duration, QString compare)
 {
     sortId = id;
     sortFlStart = flStart;
     sortFlEnd = flEnd;
     sortRegExp = regExp;
+    sortDuration = duration;
+    compareDuration = compare;
     invalidateFilter();
 }
 
@@ -45,5 +61,7 @@ void ProxyNotamsModel::resetFilter()
     sortFlStart = -1;
     sortFlEnd = -1;
     sortRegExp = "";
+    sortDuration = 0;
+    compareDuration = "";
     invalidateFilter();
 }

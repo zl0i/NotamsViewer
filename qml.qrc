@@ -14,5 +14,6 @@
         <file>qml/FilterPopup.qml</file>
         <file>qml/NotamPopup.qml</file>
         <file>qml/elements/NInputField.qml</file>
+        <file>qml/elements/NComboBox.qml</file>
     </qresource>
 </RCC>
