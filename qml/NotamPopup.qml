@@ -3,9 +3,20 @@ import QtQuick.Controls 2.15
 import QtGraphicalEffects 1.15
 
 Popup {
-    width: 200
-    height: 150
-    padding: 0
+    id: _popup
+    width: 500
+    height: _text.contentHeight+20
+
+    property string text
+
+    Label {
+        id: _text
+        width: parent.width
+        wrapMode: Text.WordWrap
+        text: _popup.text
+    }
+
+
 
     background: Rectangle {
         radius: 5

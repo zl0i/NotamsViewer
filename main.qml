@@ -6,6 +6,7 @@ import QtPositioning 5.12
 import "./qml"
 
 ApplicationWindow {
+    id: _app
     width: 1240
     height: 640
     visible: true
@@ -46,6 +47,14 @@ ApplicationWindow {
             _map.zoomLevel = 10
             _map.center = QtPositioning.coordinate(lat, lon)
         }
+        onShowNotam: {
+            _notamPopup.text = text
+            _notamPopup.y = y
+            if(y + _notamPopup.height > _app.height) {
+                _notamPopup.y = _app.height - _notamPopup.height - 20
+            }
+            _notamPopup.open()
+        }
     }
 
     FilterPopup {
@@ -54,6 +63,11 @@ ApplicationWindow {
         y: 10
         onFilter: core.notams.setFilter(id, flStart, flEnd, regExp, duration, compare)
         onReset: core.notams.resetFilter()
+    }
+    NotamPopup {
+        id: _notamPopup
+        x: parent.width/3 + 20
+        y: 10
     }
 
     Map {

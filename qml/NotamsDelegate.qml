@@ -20,7 +20,7 @@ Item {
     property int durationSeconds
     property string durationHumon
 
-    signal more(int index)
+    signal more(int index, int y)
     signal clicked(var x, var y)
 
     Column {
@@ -53,7 +53,10 @@ Item {
         height: parent.height
         hoverEnabled: true
         cursorShape: Qt.PointingHandCursor
-        onClicked: _delegate.more(_delegate.index)
+        onClicked: {
+            const point = mapToItem(null, mouseX, mouseY)
+            _delegate.more(_delegate.index, point.y)
+        }
         Image {
             x: 6; y: parent.height/2 - height/2
             width: 24

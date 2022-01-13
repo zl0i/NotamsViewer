@@ -11,6 +11,7 @@ Page {
     signal openFilter()
     signal openColor()
     signal goToMap(var lat, var lon)
+    signal showNotam(var text, int y)
 
     Row {
         x: 15; y: 20
@@ -55,6 +56,20 @@ Page {
         height: parent.height-60
         bottomMargin: 20
         model: _page.model
-        onToMap: _page.goToMap(lat, lon)
+
+        delegate: NotamsDelegate {
+           notamsId: model.notamID
+           startDate: model.startDate
+           endDate: model.endDate
+           createDate: model.createDate
+           text: model.text
+           flStart: model.flStart ?? 0
+           flEnd: model.flEnd ?? 0
+           points: model.points
+           durationSeconds: model.durationSeconds
+           durationHumon: model.durationHumon
+           onClicked: _page.goToMap(x, y)
+           onMore: _page.showNotam(text, y)
+        }
     }
 }
