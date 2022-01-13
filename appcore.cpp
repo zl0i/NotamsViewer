@@ -3,11 +3,10 @@
 AppCore::AppCore(QObject *parent)
     : QObject{parent}
 {
+    proxyNotams.setSourceModel(&model);
     connect(&loader, &NotamsLoader::finished, this, &AppCore::finished);
     connect(&loader, &NotamsLoader::finished, [=](QJsonArray notams) {
-        qDebug() << notams.count();
         model.parse(notams);
-        //emit notamsChanged();
     });
 }
 
