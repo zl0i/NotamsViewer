@@ -90,6 +90,10 @@ ApplicationWindow {
 
         NotamsMapView {
             model: core.notams
+            onClicked:  {
+                _notamView.showNotamByIndex(index)
+                //console.log(index)
+            }
         }
 
         Row {

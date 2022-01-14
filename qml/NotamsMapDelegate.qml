@@ -2,9 +2,6 @@ import QtQuick 2.15
 import QtLocation 5.15
 
 MapItemView {
-    //property var points: []
-    onModelChanged: console.log(model)
-
     delegate: MapPolygon {
 
         property var points: model
@@ -14,12 +11,7 @@ MapItemView {
         path: points.map(p => {
                              return { latitude: p.x, longitude: p.y }
                          })
-        //    path: [
-        //        { latitude: 40.66, longitude: -127.16 },
-        //        { latitude: 40.66, longitude: -132 },
-        //        { latitude: 37.5, longitude: -132 },
-        //        { latitude: 37.5, longitude: -127.16 }
-        //    ]
+
     }
 }
 

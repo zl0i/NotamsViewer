@@ -14,6 +14,12 @@ Page {
     signal showNotam(var text, int y)
     signal save();
 
+    function showNotamByIndex(index) {
+        _notamsList.positionViewAtIndex(index, ListView.Center)
+        _notamsList.currentIndex = index
+        _notamsList.currentItem.blink()
+    }
+
     Row {
         x: 15; y: 20
         spacing: 10

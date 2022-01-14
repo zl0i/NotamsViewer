@@ -23,6 +23,27 @@ Item {
     signal more(int index, int y)
     signal clicked(var x, var y)
 
+    function blink() {
+        _animation.start()
+    }
+
+    SequentialAnimation {
+        id: _animation
+        PropertyAnimation {
+            target: _background
+            property: "visible"
+            to: true
+        }
+        PauseAnimation {
+            duration: 250
+        }
+        PropertyAnimation {
+            target: _background
+            property: "visible"
+            to: false
+        }
+    }
+
     Column {
         width: parent.width
         spacing: 7
@@ -70,6 +91,7 @@ Item {
     }
 
     Rectangle {
+        id: _background
         width: parent.width
         height: parent.height
         visible: _mouseArea.containsMouse
