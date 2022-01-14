@@ -36,7 +36,6 @@ QVariant NotamsModel::data(const QModelIndex &index, int role) const
     case IsUNLRole:
         return n.value("isUNL").toBool();
     case PointsRole:
-        qDebug() << n.value("points").toArray();
         return n.value("points").toArray();
     case DurationSecRole:
         return n.value("duration_sec").toVariant();
