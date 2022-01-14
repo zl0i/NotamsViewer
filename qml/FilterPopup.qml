@@ -6,33 +6,27 @@ import "./elements"
 
 Popup {
     id: _popup
-    width: 250
+    width: 340
     height: 270
     padding: 0
 
-    signal filter(string id, int flStart, int flEnd, string regExp, int duration, string compare)
+    signal filter(var filter)
     signal reset()
 
-
-
     function preFilter() {
-        _popup.filter(_idFiled.text,
-                      _flStartField.text,
-                      _flEndField.text,
-                      _regExpFiled.text,
-                      Number(_durationField.text)*3600,
-                      _durationBox.currentText
-                      )
+        _popup.filter(format())
     }
 
     function format() {
         return {
             id: _idFiled.text,
-            flStart: _flStartField.text,
-            flEnd: _flEndField.text,
+            flStart: Number(_flStartField.text),
+            flEnd: Number(_flEndField.text),
             regExp: _regExpFiled.text,
             duration: Number(_durationField.text)*3600,
-            compareDuration: _durationBox.currentText
+            compareDuration: _durationBox.currentText,
+            isUNL: _isUNLBox.checked,
+            isArea: _isAreaBox.checked
         }
     }
 
@@ -44,17 +38,45 @@ Popup {
             label: "id:"
             onTextEdited: preFilter()
         }
-        NInputField {
-            id: _flStartField
-            label: "flStart:"
-            text: "-1"
-            onTextEdited: preFilter()
+        Row {
+            height: 35
+            spacing: 10
+            NInputField {
+                id: _flStartField
+                label: "flStart:"
+                text: "-1"
+                onTextEdited: preFilter()
+            }
+            NInputField {
+                id: _flEndField
+                label: "flEnd:"
+                text: "-1"
+                onTextEdited: preFilter()
+            }
+            Label {
+                height: parent.height
+                verticalAlignment: Text.AlignVCenter
+                text: "isUNL:"
+            }
+            NCheckBox {
+                id: _isUNLBox
+                height: parent.height
+                onCheckedChanged: preFilter()
+            }
         }
-        NInputField {
-            id: _flEndField
-            label: "flEnd:"
-            text: "-1"
-            onTextEdited: preFilter()
+        Row {
+            height: 35
+            spacing: 10
+            Label {
+                height: parent.height
+                verticalAlignment: Text.AlignVCenter
+                text: "isArea:"
+            }
+            NCheckBox {
+                id: _isAreaBox
+                height: parent.height
+                onCheckedChanged: preFilter()
+            }
         }
         NInputField {
             id: _regExpFiled
@@ -106,6 +128,8 @@ Popup {
             _flEndField.text = "-1"
             _regExpFiled.text = ""
             _durationField.text = "0"
+            _isUNLBox.checked = false
+            _isAreaBox.checked = false
             _popup.reset()
         }
     }

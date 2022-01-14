@@ -41,17 +41,27 @@ bool ProxyNotamsModel::filterAcceptsRow(int sourceRow, const QModelIndex &source
             accept &= duration >= sortDuration;
         }
     }
+    if(sortUNL) {
+        bool isUNL = sourceModel()->data(index, NotamsModel::IsUNLRole).toBool();
+        accept &= isUNL;
+    }
+    if(sortArea) {
+        QJsonArray areas = sourceModel()->data(index, NotamsModel::PointsRole).toJsonArray();
+        accept &= !areas.isEmpty();
+    }
     return accept;
 }
 
-void ProxyNotamsModel::setFilter(QString id, int flStart, int flEnd, QString regExp, int duration, QString compare)
+void ProxyNotamsModel::setFilter(QJsonObject filter)
 {
-    sortId = id;
-    sortFlStart = flStart;
-    sortFlEnd = flEnd;
-    sortRegExp = regExp;
-    sortDuration = duration;
-    compareDuration = compare;
+    sortId = filter.value("id").toString();
+    sortFlStart = filter.value("flStart").toInt();
+    sortFlEnd = filter.value("flEnd").toInt();
+    sortRegExp = filter.value("regExp").toString();
+    sortDuration = filter.value("duration").toInt();
+    compareDuration = filter.value("compareDuration").toString();
+    sortUNL = filter.value("isUNL").toBool();
+    sortArea = filter.value("isArea").toBool();
     invalidateFilter();
 }
 
@@ -63,5 +73,7 @@ void ProxyNotamsModel::resetFilter()
     sortRegExp = "";
     sortDuration = 0;
     compareDuration = "";
+    sortUNL = false;
+    sortArea = false;
     invalidateFilter();
 }

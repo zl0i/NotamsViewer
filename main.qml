@@ -63,7 +63,7 @@ ApplicationWindow {
         id: _filterPopup
         x: parent.width/3 + 20
         y: 10
-        onFilter: core.notams.setFilter(id, flStart, flEnd, regExp, duration, compare)
+        onFilter: core.notams.setFilter(filter)
         onReset: core.notams.resetFilter()
     }
     NotamPopup {

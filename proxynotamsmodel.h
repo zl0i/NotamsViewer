@@ -21,12 +21,13 @@ private:
     QString sortRegExp;
     int sortDuration = 0;
     QString compareDuration = "";
-
+    bool sortUNL = false;
+    bool sortArea = false;
 
 signals:
 
 public slots:
-    void setFilter(QString id, int flStart, int flEnd, QString regExp, int duration, QString compare);
+    void setFilter(QJsonObject filter);
     void resetFilter();
 
 };
