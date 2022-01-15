@@ -12,7 +12,7 @@ RecentModel::RecentModel(QObject *parent)
 
 RecentModel::~RecentModel()
 {
-    qDebug() << "tut";
+
     QJsonDocument doc(array);
     file.resize(0);
     file.write(doc.toJson());
@@ -64,10 +64,32 @@ void RecentModel::save(QString name, QString icaos, QJsonObject filter)
         }
     }
 
+    beginInsertRows(QModelIndex {}, array.count(), array.count());
     array.append(QJsonObject {
                      {"name", name},
                      {"icaos", icaos},
                      {"filter", filter}
                  });
+    endInsertRows();
+}
+
+void RecentModel::remove(QString name)
+{
+    for(int i = 0; i < array.count(); i++) {
+        QJsonObject preset = array.at(i).toObject();
+        if(preset.value("name").toString() == name) {
+            beginRemoveRows(QModelIndex {}, i, i);
+            array.removeAt(i);
+            endRemoveRows();
+            return;
+        }
+    }
+}
+
+void RecentModel::removeAll()
+{
+    beginResetModel();
+    array = QJsonArray();
+    endResetModel();
 }
 

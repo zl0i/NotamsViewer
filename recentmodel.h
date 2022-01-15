@@ -26,6 +26,7 @@ public:
     QVariant data(const QModelIndex &index, int role) const;
     QHash<int, QByteArray> roleNames() const;
 
+
 private:
     QJsonArray array;
     QFile file;
@@ -34,6 +35,8 @@ signals:
 
 public slots:
     void save(QString name, QString icaos, QJsonObject filter);
+    void remove(QString name);
+    void removeAll();
 
 };
 

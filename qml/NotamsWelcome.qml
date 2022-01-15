@@ -12,7 +12,9 @@ Page {
     property var recent: []
     property alias icaos: _icaosField.text
 
-    signal load(var icaos)
+    signal load(string name, var icaos)
+    signal remove(string name)
+    signal removeAll()
 
     Column {
         x: 15; y: 20
@@ -33,8 +35,8 @@ Page {
         NButton {
             text: qsTr("Получить")
             onClicked: {
-                 const icaos = _icaosField.text.split(" ")
-                _page.load(icaos)
+                const icaos = _icaosField.text.split(" ")
+                _page.load("", icaos)
             }
         }
         Label {
@@ -45,36 +47,17 @@ Page {
             width: parent.width
             height: parent.height - y
             bottomMargin: 20
-            spacing: 20
+            spacing: 10
             clip: true
             model: _page.recent
-            delegate: Item {
-                width: parent.width
-                height: 45
-                Label {
-                    width: parent.width
-                    height: 45
-                    wrapMode: Text.WordWrap
-                    elide: Text.ElideRight
-                    text: model.icaos
-                }
-
-                Rectangle {
-                    width: parent.width
-                    height: parent.height
-                    visible: _mouseArea.containsMouse
-                    color: _mouseArea.containsPress ? "#A0C4C4C4" : "#80C4C4C4"
-                }
-
-                MouseArea {
-                    id: _mouseArea
-                    width: parent.width-30
-                    height: parent.height
-                    hoverEnabled: true
-                    onClicked: _page.load(model.icaos.split(" "))
-                }
+            delegate: PresetDelegate {
+                name: model.name
+                icaos: model.icaos
+                onClicked:  _page.load(model.name, model.icaos.split(" "))
+                onRemove: _page.remove(name)
+                onRemoveAll: _page.removeAll()
             }
         }
     }
-
 }
+

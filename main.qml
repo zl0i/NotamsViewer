@@ -36,6 +36,8 @@ ApplicationWindow {
             core.loadNotams(icaos)
             _stack.push(_notamView)
         }
+        onRemove: core.recents.remove(name)
+        onRemoveAll: core.recents.removeAll()
     }
 
     NotamsView {

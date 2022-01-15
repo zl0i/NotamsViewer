@@ -17,5 +17,6 @@
         <file>qml/elements/NComboBox.qml</file>
         <file>qml/SaveDialog.qml</file>
         <file>qml/elements/NCheckBox.qml</file>
+        <file>qml/PresetDelegate.qml</file>
     </qresource>
 </RCC>
