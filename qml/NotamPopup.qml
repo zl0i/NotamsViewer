@@ -9,14 +9,17 @@ Popup {
 
     property string text
 
-    Label {
+    TextInput {
         id: _text
+        activeFocusOnPress: false
         width: parent.width
+        selectByMouse: true
+        selectionColor: "#3471CE"
+        selectedTextColor: "#FFFFFF"
+        font.pixelSize: 14
         wrapMode: Text.WordWrap
         text: _popup.text
     }
-
-
 
     background: Rectangle {
         radius: 5
