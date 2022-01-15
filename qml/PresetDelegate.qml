@@ -4,7 +4,7 @@ import QtGraphicalEffects 1.15
 
 Item {
     id: _delegate
-    width: parent.width
+    width: ListView.view.width
     height: 65
 
     property string name
