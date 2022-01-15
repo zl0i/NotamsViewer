@@ -18,6 +18,7 @@ MapItemView {
                 color: "#F04A4A"
                 opacity: 0.6
                 border { width: 1; color: "#000000" }
+                clip: true
                 path: model.modelData.map(p => {
                                               return { latitude: p.x, longitude: p.y }
                                           })
