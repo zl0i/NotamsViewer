@@ -33,8 +33,17 @@ ApplicationWindow {
         visible: false
         recent: core.recents
         onLoad: {
+            _filterPopup.resetUI()
+            core.notams.resetFilter()
+            _saveDialog.presetName = ""
             core.loadNotams(icaos)
             _stack.push(_notamView)
+        }
+        onLoadRecent: {
+            core.loadNotams(icaos)
+            _stack.push(_notamView)
+            _filterPopup.setFilter(filter)
+            _saveDialog.presetName = name
         }
         onRemove: core.recents.remove(name)
         onRemoveAll: core.recents.removeAll()
@@ -75,7 +84,7 @@ ApplicationWindow {
     }
     SaveDialog {
         id: _saveDialog
-        onSaveToRecent: {            
+        onSaveToRecent: {
             core.recents.save(name, _welcome.icaos, _filterPopup.format())
             close()
         }
@@ -92,10 +101,7 @@ ApplicationWindow {
 
         NotamsMapView {
             model: core.notams
-            onClicked:  {
-                _notamView.showNotamByIndex(index)
-                //console.log(index)
-            }
+            onClicked: _notamView.showNotamByIndex(index)
         }
 
         Row {

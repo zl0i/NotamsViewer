@@ -12,7 +12,8 @@ Page {
     property var recent: []
     property alias icaos: _icaosField.text
 
-    signal load(string name, var icaos)
+    signal load(var icaos)
+    signal loadRecent(string name, var icaos, var filter)
     signal remove(string name)
     signal removeAll()
 
@@ -36,7 +37,7 @@ Page {
             text: qsTr("Получить")
             onClicked: {
                 const icaos = _icaosField.text.split(" ")
-                _page.load("", icaos)
+                _page.load(icaos)
             }
         }
         Label {
@@ -53,7 +54,7 @@ Page {
             delegate: PresetDelegate {
                 name: model.name
                 icaos: model.icaos
-                onClicked:  _page.load(model.name, model.icaos.split(" "))
+                onClicked:  _page.loadRecent(model.name, model.icaos.split(" "), model.filter)
                 onRemove: _page.remove(name)
                 onRemoveAll: _page.removeAll()
             }

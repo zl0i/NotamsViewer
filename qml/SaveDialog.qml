@@ -16,6 +16,8 @@ Dialog {
     modal: true
     dim: true
 
+    property alias presetName: _nameField.text
+
     signal saveToRecent(string name)
     signal saveToFile(string path, bool filtered)
 

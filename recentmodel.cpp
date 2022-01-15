@@ -6,13 +6,11 @@ RecentModel::RecentModel(QObject *parent)
     if(file.open(QIODevice::ReadWrite)) {
         array = QJsonDocument::fromJson(file.readAll()).array();
         emit dataChanged(index(0, 0), index(rowCount()-1, 0));
-
     }
 }
 
 RecentModel::~RecentModel()
 {
-
     QJsonDocument doc(array);
     file.resize(0);
     file.write(doc.toJson());
@@ -37,7 +35,7 @@ QVariant RecentModel::data(const QModelIndex &index, int role) const
     case ICAOSRoles:
         return n.value("icaos").toString();
     case FilterRoles:
-        return n.value("filters").toVariant();
+        return n.value("filter").toVariant();
     default:
         return QVariant();
     }
@@ -49,7 +47,7 @@ QHash<int, QByteArray> RecentModel::roleNames() const
 
     roles[NameRoles] = "name";
     roles[ICAOSRoles] = "icaos";
-    roles[FilterRoles] = "filters";
+    roles[FilterRoles] = "filter";
     return roles;
 }
 
@@ -58,8 +56,9 @@ void RecentModel::save(QString name, QString icaos, QJsonObject filter)
     for(int i = 0; i < array.count(); i++) {
         QJsonObject preset = array.at(i).toObject();
         if(preset.value("name").toString() == name) {
-            array.at(i).toObject().insert("icaos", icaos);
-            array.at(i).toObject().insert("filter", filter);
+            preset.insert("icaos", icaos);
+            preset.insert("filter", filter);
+            array.replace(i, preset);
             return;
         }
     }

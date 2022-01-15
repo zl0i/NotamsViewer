@@ -17,6 +17,16 @@ Popup {
         _popup.filter(format())
     }
 
+    function resetUI() {
+        _idFiled.text = ""
+        _flStartField.text = "-1"
+        _flEndField.text = "-1"
+        _regExpFiled.text = ""
+        _durationField.text = "0"
+        _isUNLBox.checked = false
+        _isAreaBox.checked = false
+    }
+
     function format() {
         return {
             id: _idFiled.text,
@@ -28,6 +38,18 @@ Popup {
             isUNL: _isUNLBox.checked,
             isArea: _isAreaBox.checked
         }
+    }
+
+    function setFilter(filter) {
+        _idFiled.text = filter.id
+        _flStartField.text = filter.flStart
+        _flEndField.text = filter.flEnd
+        _regExpFiled.text = filter.regExp
+        _durationField.text = filter.duration/3600
+        _durationBox.currentIndex = Array.from(_durationBox.model).indexOf(filter.compareDuration)
+        _isUNLBox.checked = filter.isUNL
+        _isAreaBox.checked = filter.isArea
+        preFilter()
     }
 
     Column {
@@ -123,13 +145,7 @@ Popup {
         y: parent.height - height - 10
         text: qsTr("Сбросить")
         onClicked: {
-            _idFiled.text = ""
-            _flStartField.text = "-1"
-            _flEndField.text = "-1"
-            _regExpFiled.text = ""
-            _durationField.text = "0"
-            _isUNLBox.checked = false
-            _isAreaBox.checked = false
+           _popup.resetUI()
             _popup.reset()
         }
     }
