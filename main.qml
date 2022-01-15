@@ -73,9 +73,9 @@ ApplicationWindow {
     }
     SaveDialog {
         id: _saveDialog
-        onSaveToRecent: {
+        onSaveToRecent: {            
+            core.recents.save(name, _welcome.icaos, _filterPopup.format())
             close()
-            core.recents.add("test", _welcome.icaos, _filterPopup.format())
         }
     }
 

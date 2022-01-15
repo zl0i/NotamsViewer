@@ -53,8 +53,17 @@ QHash<int, QByteArray> RecentModel::roleNames() const
     return roles;
 }
 
-void RecentModel::add(QString name, QString icaos, QJsonObject filter)
+void RecentModel::save(QString name, QString icaos, QJsonObject filter)
 {
+    for(int i = 0; i < array.count(); i++) {
+        QJsonObject preset = array.at(i).toObject();
+        if(preset.value("name").toString() == name) {
+            array.at(i).toObject().insert("icaos", icaos);
+            array.at(i).toObject().insert("filter", filter);
+            return;
+        }
+    }
+
     array.append(QJsonObject {
                      {"name", name},
                      {"icaos", icaos},

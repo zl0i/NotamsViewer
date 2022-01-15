@@ -33,7 +33,7 @@ private:
 signals:
 
 public slots:
-    void add(QString name, QString icaos, QJsonObject filter);
+    void save(QString name, QString icaos, QJsonObject filter);
 
 };
 

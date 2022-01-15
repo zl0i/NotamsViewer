@@ -10,13 +10,13 @@ Dialog {
     parent: Overlay.overlay
     x: parent.width/2 - width/2
     y: parent.height/2 - height/2
-    width: 410
+    width: 425
     height: 170
     padding: 20
     modal: true
     dim: true
 
-    signal saveToRecent()
+    signal saveToRecent(string name)
     signal saveToFile(string path, bool filtered)
 
     Overlay.modal: Rectangle {
@@ -30,7 +30,7 @@ Dialog {
             spacing: 10
             NTextField {
                 id: _pathField
-                width: 260
+                width: 275
                 height: 30
             }
             NButton {
@@ -38,18 +38,30 @@ Dialog {
                 onClicked: _fileDialog.open()
             }
         }
-        NCheckBox {
-            text: qsTr("Сохранить только отфильстрованный результат")
+        Row {
+            spacing: 10
+            NCheckBox {
+                text: qsTr("Только отфильтрованные")
+            }
+            NButton {
+                width: 165
+                text: qsTr("Сохранить в файл")
+            }
         }
         Row {
             spacing: 10
+            NTextField {
+                id: _nameField
+                placeholderText: qsTr("Имя пресета")
+                width: 215
+                height: 30
+            }
             NButton {
+                width: 165
                 text: qsTr("Сохранить как пресет")
-                onClicked: _dialog.saveToRecent()
+                onClicked: _dialog.saveToRecent(_nameField.text)
             }
-            NButton {
-                text: qsTr("Сохранить в файл")
-            }
+
         }
     }
 
