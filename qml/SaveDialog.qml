@@ -43,11 +43,13 @@ Dialog {
         Row {
             spacing: 10
             NCheckBox {
+                id: _filterBox
                 text: qsTr("Только отфильтрованные")
             }
             NButton {
                 width: 165
                 text: qsTr("Сохранить в файл")
+                onClicked: _dialog.saveToFile(_pathField.text, _filterBox.checked)
             }
         }
         Row {

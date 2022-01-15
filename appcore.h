@@ -32,6 +32,7 @@ signals:
 
 public slots:
     void loadNotams(QJsonArray icao);
+    void saveToFile(QString file, bool isFiltered);
 
 };
 

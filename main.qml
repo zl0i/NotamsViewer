@@ -88,6 +88,10 @@ ApplicationWindow {
             core.recents.save(name, _welcome.icaos, _filterPopup.format())
             close()
         }
+        onSaveToFile: {
+            core.saveToFile(path, filtered)
+            close()
+        }
     }
 
     Map {
