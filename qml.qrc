@@ -5,7 +5,6 @@
         <file>qml/NotamsList.qml</file>
         <file>qml/NotamsDelegate.qml</file>
         <file>qml/NotamsMapView.qml</file>
-        <file>qml/NotamsMapDelegate.qml</file>
         <file>qml/NotamsWelcome.qml</file>
         <file>qml/elements/NTextField.qml</file>
         <file>qml/elements/NButton.qml</file>
