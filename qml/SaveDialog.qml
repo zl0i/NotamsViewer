@@ -81,7 +81,7 @@ Dialog {
 
     Labs.FileDialog {
         id: _fileDialog
-        fileMode: Labs.FileDialog.SaveFile
+        fileMode: Labs.FileDialog.OpenFile
         nameFilters: ["Text files (*.txt)"]
         onAccepted: _pathField.text = String(currentFile).slice(8)
     }
