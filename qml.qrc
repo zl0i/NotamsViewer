@@ -17,5 +17,6 @@
         <file>qml/SaveDialog.qml</file>
         <file>qml/elements/NCheckBox.qml</file>
         <file>qml/PresetDelegate.qml</file>
+        <file>qml/BusyPage.qml</file>
     </qresource>
 </RCC>

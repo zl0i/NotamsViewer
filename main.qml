@@ -16,8 +16,9 @@ ApplicationWindow {
 
     Connections {
         target: core
-        function onFinished(str) {
-            //console.log( str)
+        function onFinished() {
+            _busyPage.visible = false
+            _stack.push(_notamView)
         }
     }
 
@@ -37,16 +38,22 @@ ApplicationWindow {
             core.notams.resetFilter()
             _saveDialog.presetName = ""
             core.loadNotams(icaos)
-            _stack.push(_notamView)
+            _busyPage.visible = true
         }
         onLoadRecent: {
             core.loadNotams(icaos)
-            _stack.push(_notamView)
+            _busyPage.visible = true
             _filterPopup.setFilter(filter)
             _saveDialog.presetName = name
         }
         onRemove: core.recents.remove(name)
         onRemoveAll: core.recents.removeAll()
+    }
+
+    BusyPage {
+        id: _busyPage
+        anchors.fill: _welcome
+        visible: false
     }
 
     NotamsView {
