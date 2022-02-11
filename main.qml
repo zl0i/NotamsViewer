@@ -2,8 +2,10 @@ import QtQuick 2.15
 import QtQuick.Controls 2.12
 import QtLocation 5.12
 import QtPositioning 5.12
+import Qt.labs.platform 1.1 as Labs
 
 import "./qml"
+import "./qml/elements"
 
 ApplicationWindow {
     id: _app
@@ -89,6 +91,7 @@ ApplicationWindow {
         x: parent.width/3 + 20
         y: 10
     }
+
     SaveDialog {
         id: _saveDialog
         onSaveToRecent: {
@@ -101,6 +104,17 @@ ApplicationWindow {
         }
     }
 
+    Component {
+        id: _fileDialogComponent
+        Labs.FileDialog {
+            id: _saveGrabDialog
+            fileMode: Labs.FileDialog.SaveFile
+            nameFilters: ["Image files (*.png)"]
+        }
+    }
+
+
+
     Map {
         id: _map
         x: parent.width/3
@@ -109,6 +123,29 @@ ApplicationWindow {
         center: QtPositioning.coordinate(44.34, -94.30)
         zoomLevel: 3.5
         plugin: Plugin { name: "osm" }
+
+        NRoundButtton {
+            id: _grabButton
+            x: parent.width - width - 20
+            y: 20
+            image: "qrc:/icons/image-white.svg"
+            imageWidth: 21
+            imageHeight: 18
+            onClicked: {
+                const dialog = _fileDialogComponent.createObject()
+                dialog.fileMode = Labs.FileDialog.SaveFile
+                dialog.open()
+                dialog.accepted.connect(function() {
+                    _grabButton.visible = false
+                    _map.grabToImage(function (result) {
+                        _grabButton.visible = true
+                        result.saveToFile(String(dialog.file).slice(8))
+                        dialog.close()
+                        dialog.destroy()
+                    })
+                })
+            }
+        }
 
         NotamsMapView {
             model: core.notams

@@ -8,11 +8,13 @@ Rectangle {
     color: _mouseArea.containsPress ? "#1D4B8F" : "#3471CE"
 
     property alias image: _image.source
+    property alias imageWidth: _image.width
+    property alias imageHeight: _image.height
     signal clicked()
 
     Image {
         id: _image
-        x: 7.5; y: 7.5
+        anchors.centerIn: parent
         width: 25
         height: 25
     }
