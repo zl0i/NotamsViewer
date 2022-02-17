@@ -5,7 +5,7 @@ NotamsLoader::NotamsLoader(QObject *parent)
 {
     notams.setProcessChannelMode(QProcess::MergedChannels);
     //connect(&notams, &QProcess::readyRead, this, &NotamsLoader::slotReadChanel);
-    connect(&notams, static_cast<void (QProcess::*)(int)>(&QProcess::finished), this, &NotamsLoader::loaded);
+    connect(&notams, static_cast<void (QProcess::*)(int, QProcess::ExitStatus)>(&QProcess::finished), this, &NotamsLoader::loaded);
 }
 
 void NotamsLoader::slotReadChanel()
@@ -21,7 +21,7 @@ void NotamsLoader::slotReadChanel()
         emit newOutputData(output);
 }
 
-void NotamsLoader::loaded(int code)
+void NotamsLoader::loaded(int code, QProcess::ExitStatus)
 {
     if(code != 0)
        return emit finished(QJsonArray {});

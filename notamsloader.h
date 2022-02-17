@@ -23,7 +23,7 @@ signals:
 
 private slots:
     void slotReadChanel();
-    void loaded(int);
+    void loaded(int, QProcess::ExitStatus status);
 
 public slots:
     void loadNotams(QJsonArray icao);
