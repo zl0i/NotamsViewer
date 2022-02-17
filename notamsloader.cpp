@@ -40,5 +40,9 @@ void NotamsLoader::loadNotams(QJsonArray icao)
     }
     QStringList arguments;
     arguments << "get" << "-i" << icaos.join(" ");
+#ifdef RELEASE
+    notams.start("./notams.exe", arguments);
+#else
     notams.start("../notams.exe", arguments);
+#endif
 }
