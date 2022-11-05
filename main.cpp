@@ -3,7 +3,7 @@
 #include <QQmlContext>
 
 #include "src/appcore.h"
-#include "src/loader/notamscliloader.h"
+#include "src/loader/notamshttploader.h"
 
 int main(int argc, char *argv[])
 {
@@ -16,7 +16,7 @@ int main(int argc, char *argv[])
     QQmlApplicationEngine engine;
 
 
-    AppCore *core = new AppCore(new NotamsCLILoader());
+    AppCore *core = new AppCore(new NotamsHttpLoader());
     engine.rootContext()->setContextProperty("core", core);
 
     const QUrl url(QStringLiteral("qrc:/main.qml"));
