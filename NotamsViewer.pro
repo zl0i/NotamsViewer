@@ -7,12 +7,14 @@ CONFIG += c++11
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
-        appcore.cpp \
+        src/appcore.cpp \
         main.cpp \
-        notamsloader.cpp \
-        notamsmodel.cpp \
-        proxynotamsmodel.cpp \
-        recentmodel.cpp
+        src/loader/abstractnotamsloader.cpp \
+        src/loader/notamscliloader.cpp \
+        src/loader/notamshttploader.cpp \
+        src/notamsmodel.cpp \
+        src/proxynotamsmodel.cpp \
+        src/recentmodel.cpp
 
 RESOURCES += qml.qrc \
     icons.qrc
@@ -31,8 +33,10 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 CONFIG(release, debug|release): DEFINES += RELEASE
 
 HEADERS += \
-    appcore.h \
-    notamsloader.h \
-    notamsmodel.h \
-    proxynotamsmodel.h \
-    recentmodel.h
+    src/appcore.h \
+    src/loader/abstractnotamsloader.h \
+    src/loader/notamscliloader.h \
+    src/loader/notamshttploader.h \
+    src/notamsmodel.h \
+    src/proxynotamsmodel.h \
+    src/recentmodel.h

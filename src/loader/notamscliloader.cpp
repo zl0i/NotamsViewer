@@ -1,14 +1,14 @@
-#include "notamsloader.h"
+#include "notamscliloader.h"
 
-NotamsLoader::NotamsLoader(QObject *parent)
-    : QObject{parent}
+NotamsCLILoader::NotamsCLILoader(QObject *parent)
+    : AbstractNotamsLoader{parent}
 {
     notams.setProcessChannelMode(QProcess::MergedChannels);
     //connect(&notams, &QProcess::readyRead, this, &NotamsLoader::slotReadChanel);
-    connect(&notams, static_cast<void (QProcess::*)(int, QProcess::ExitStatus)>(&QProcess::finished), this, &NotamsLoader::loaded);
+    connect(&notams, static_cast<void (QProcess::*)(int, QProcess::ExitStatus)>(&QProcess::finished), this, &NotamsCLILoader::loaded);
 }
 
-void NotamsLoader::slotReadChanel()
+void NotamsCLILoader::slotReadChanel()
 {
     notams.setReadChannel(QProcess::StandardError);
     QByteArray error = notams.readAll();
@@ -21,7 +21,7 @@ void NotamsLoader::slotReadChanel()
         emit newOutputData(output);
 }
 
-void NotamsLoader::loaded(int code, QProcess::ExitStatus)
+void NotamsCLILoader::loaded(int code, QProcess::ExitStatus)
 {
     if(code != 0)
        return emit finished(QJsonArray {});
@@ -32,7 +32,7 @@ void NotamsLoader::loaded(int code, QProcess::ExitStatus)
     emit finished(doc.array());
 }
 
-void NotamsLoader::loadNotams(QJsonArray icao)
+void NotamsCLILoader::loadNotams(QJsonArray icao)
 {
     QStringList icaos;
     for(int i = 0; i < icao.count(); i++) {

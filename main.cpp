@@ -2,7 +2,8 @@
 #include <QQmlApplicationEngine>
 #include <QQmlContext>
 
-#include "appcore.h"
+#include "src/appcore.h"
+#include "src/loader/notamscliloader.h"
 
 int main(int argc, char *argv[])
 {
@@ -14,20 +15,15 @@ int main(int argc, char *argv[])
 
     QQmlApplicationEngine engine;
 
-    AppCore *core = new AppCore();
+
+    AppCore *core = new AppCore(new NotamsCLILoader());
     engine.rootContext()->setContextProperty("core", core);
 
     const QUrl url(QStringLiteral("qrc:/main.qml"));
     QObject::connect(&app, &QCoreApplication::aboutToQuit, [=] {
       core->deleteLater();
     });
-//    QObject::connect(&engine, &QQmlApplicationEngine::objectCreated,
-//                     &app, [url, core](QObject *obj, const QUrl &objUrl) {
-//        if (!obj && url == objUrl) {
-//            core->deleteLater();
-//            QCoreApplication::exit(-1);
-//        }
-//    }, Qt::QueuedConnection);
+
     engine.load(url);
 
     return app.exec();

@@ -1,11 +1,11 @@
 #include "appcore.h"
 
-AppCore::AppCore(QObject *parent)
-    : QObject{parent}, _recents(this)
+AppCore::AppCore(AbstractNotamsLoader *loader, QObject *parent)
+    : QObject{parent}, loader(loader), _recents(this)
 {
     proxyNotams.setSourceModel(&model);
-    connect(&loader, &NotamsLoader::finished, this, &AppCore::finished);
-    connect(&loader, &NotamsLoader::finished, [=](QJsonArray notams) {
+    connect(loader, &AbstractNotamsLoader::finished, this, &AppCore::finished);
+    connect(loader, &AbstractNotamsLoader::finished, [=](QJsonArray notams) {
         model.parse(notams);
     });
 }
@@ -13,7 +13,7 @@ AppCore::AppCore(QObject *parent)
 
 void AppCore::loadNotams(QJsonArray icao)
 {
-    loader.loadNotams(icao);
+    loader->loadNotams(icao);
 
 }
 

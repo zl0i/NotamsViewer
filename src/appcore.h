@@ -3,7 +3,7 @@
 
 #include <QObject>
 
-#include "notamsloader.h"
+#include "./loader/abstractnotamsloader.h"
 #include "notamsmodel.h"
 #include "proxynotamsmodel.h"
 #include "recentmodel.h"
@@ -14,13 +14,13 @@ class AppCore : public QObject
     Q_PROPERTY(ProxyNotamsModel* notams READ notams NOTIFY notamsChanged)
     Q_PROPERTY(RecentModel* recents READ recents NOTIFY recentsChanged)
 public:
-    explicit AppCore(QObject *parent = nullptr);
+    explicit AppCore(AbstractNotamsLoader *loader, QObject *parent = nullptr);
 
     ProxyNotamsModel* notams() { return &proxyNotams; }
     RecentModel* recents() { return &_recents; }
 
 private:
-    NotamsLoader loader;
+    AbstractNotamsLoader *loader;
     NotamsModel model;
     ProxyNotamsModel proxyNotams;
     RecentModel _recents;
