@@ -2,6 +2,8 @@
 #define APPCORE_H
 
 #include <QObject>
+#include <QGuiApplication>
+#include <QClipboard>
 
 #include "./loader/abstractnotamsloader.h"
 #include "notamsmodel.h"
@@ -33,6 +35,7 @@ signals:
 public slots:
     void loadNotams(QJsonArray icao);
     void saveToFile(QString file, bool isFiltered);
+    void copyToClipboard(QString text);
 
 };
 

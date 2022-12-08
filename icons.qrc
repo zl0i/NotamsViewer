@@ -6,5 +6,6 @@
         <file>icons/filter-white.svg</file>
         <file>icons/save-white.svg</file>
         <file>icons/image-white.svg</file>
+        <file>icons/clipboard-black.svg</file>
     </qresource>
 </RCC>

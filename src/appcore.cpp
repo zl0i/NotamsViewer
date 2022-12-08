@@ -14,7 +14,6 @@ AppCore::AppCore(AbstractNotamsLoader *loader, QObject *parent)
 void AppCore::loadNotams(QJsonArray icao)
 {
     loader->loadNotams(icao);
-
 }
 
 void AppCore::saveToFile(QString path, bool isFiltered)
@@ -46,4 +45,9 @@ void AppCore::saveToFile(QString path, bool isFiltered)
         }
     }
     file.close();
+}
+
+void AppCore::copyToClipboard(QString text)
+{
+     QGuiApplication::clipboard()->setText(text);
 }

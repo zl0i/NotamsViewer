@@ -90,6 +90,7 @@ ApplicationWindow {
         id: _notamPopup
         x: parent.width/3 + 20
         y: 10
+        onCopyToClipboard: core.copyToClipboard(text);
     }
 
     SaveDialog {
